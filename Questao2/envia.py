@@ -1,4 +1,3 @@
-
 __author__ = "Jean Nunes"
 __copyright__ = "Copyright 2018"
 __credits__ = ["Jean Nunes"]
@@ -28,8 +27,8 @@ rede_out, err = rede_p.communicate()
 
 with open("nip.log", "w+") as arquivo:
     print("{}\n".format(so_out), file=arquivo)
-print("{}\n".format(hard_out), file=arquivo)
-print("{}\n".format(rede_out), file=arquivo)
+    print("{}\n".format(hard_out), file=arquivo)
+    print("{}\n".format(rede_out), file=arquivo)
 
 with open("nip.log") as arquivo:
     info = str(arquivo.readlines())
@@ -41,8 +40,8 @@ channel = connection.channel()
 channel.exchange_declare(exchange='nip', exchange_type='fanout')
 
 channel.basic_publish(exchange='nip',
-routing_key = '',
-body = info)
+                      routing_key='',
+                      body=info)
 
 print(" [x] Enviando log... ")
 
