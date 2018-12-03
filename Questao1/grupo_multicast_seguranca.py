@@ -1,6 +1,6 @@
 
 PORTA  = 1234               # porta
-GRUPO4 = '224.0.0.251'      # endereco multicast
+GRUPO4 = '224.3.1.1'      # endereco multicast
 
 TTL = 1                   # time to live
 timeout = 3
@@ -28,7 +28,8 @@ def envia(grupo):
     UDP_IP = "224.3.1.1"
     UDP_PORT = 5005
     buf = 1024
-    file_name = 'teste.txt'
+    #file_name = 'Seguranca\\Arquivos do Servidor\\senha_acesso.txt'
+    file_name = 'senha_acesso.txt'
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.sendto(file_name.encode(), (UDP_IP, UDP_PORT))
@@ -58,8 +59,8 @@ def recebe(grupo):
         if data:
             print("File name:", data)
             file_name = data.strip()
-        f = open('testefinal.txt', 'wb')
-
+        #f = open('Seguranca\\Arquivos do Cliente\\senha_acesso.txt', 'wb')
+        f = open('senha_acesso.txt', 'wb')
         while True:
             ready = select.select([sock], [], [], timeout)
             if ready[0]:
