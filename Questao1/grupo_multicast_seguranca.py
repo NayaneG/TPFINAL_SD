@@ -25,15 +25,14 @@ def main():
 
 
 def envia(grupo):
-    UDP_IP = "224.3.1.1"
+    UDP_IP = "127.0.0.1"
     UDP_PORT = 5005
     buf = 1024
-    #file_name = 'Seguranca\\Arquivos do Servidor\\senha_acesso.txt'
-    file_name = 'senha_acesso.txt'
+    file_name = 'Seguranca\\Arquivos do Servidor\\senha_acesso.txt'
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.sendto(file_name.encode(), (UDP_IP, UDP_PORT))
-    print("Sending %s ..." % file_name)
+    print('Enviando...',file_name)
 
     f = open(file_name, "r")
     data = f.read(buf)
@@ -59,15 +58,16 @@ def recebe(grupo):
         if data:
             print("File name:", data)
             file_name = data.strip()
-        #f = open('Seguranca\\Arquivos do Cliente\\senha_acesso.txt', 'wb')
-        f = open('senha_acesso.txt', 'wb')
+        f = open('Seguranca\\Arquivos do Cliente\\senha_acesso.txt', 'wb')
+
         while True:
             ready = select.select([sock], [], [], timeout)
+            print('Carregando...')
             if ready[0]:
                 data, addr = sock.recvfrom(1024)
                 f.write(data)
             else:
-                print("%s Finish!" % file_name)
+                print("\nFinish!" % file_name)
                 f.close()
                 break
 
